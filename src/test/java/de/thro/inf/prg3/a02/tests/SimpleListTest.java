@@ -45,7 +45,7 @@ public class SimpleListTest {
 	@Test
 	void testFilterAnonymousClass(){
 		SimpleListImpl result = (SimpleListImpl) testList.filter(new SimpleFilter() {
-			@Override
+			@Override //returned true für alle obj größer 2 und false für alle kleineren
 			public boolean include(Object item) {
 				int current = (int)item;
 				return current > 2;
@@ -65,11 +65,5 @@ public class SimpleListTest {
 			int i = (int)o;
 			assertTrue(i % 2 == 0);
 		}
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		testList.delete();
 	}
 }

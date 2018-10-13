@@ -11,10 +11,11 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
     /**
      * Globale Variablen
      */
-    static Element head;
-    static int elementCounter = 0;
+    private Element head; //by static würde die liste erweitert werden weil alle anderen static elemente auf diese variable
+    //zu greifen und so lange auf dieses element gezeigt wird kann es nicht gelöscht werden
+    private int elementCounter = 0;
 
-    /**
+     /**
      * Kettenglieder der Verketetenliste
      */
     private static class Element
@@ -39,6 +40,8 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
         public void setNext(Element next) {
             this.next = next;
         }
+
+
     }
 
     /**
@@ -94,12 +97,6 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
         elementCounter++; //counts length of list
     }
 
-    public void delete()
-    {
-        head = null;
-        elementCounter = 0;
-    }
-
     @Override
     public int size() {
         return elementCounter;
@@ -107,12 +104,31 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
 
     @Override
     public SimpleList filter(SimpleFilter filter) {
-        return null;
+        SimpleList result = new SimpleListImpl(); /*erstellt neue leere liste*/
+        for(Object o : this){ //Foreach schleife berührt alle obj typ simplelistimpl
+            if(filter.include(o)){//include operationsaufruf welche returned true or false bool if true
+                //if true actuelle obj zu liste hinzugefügt, läuft durch bis alle obj berührt
+                //
+                result.add(o);
+            }
+        }
+        return result;
     }
 
     @Override
     public Iterator iterator() {
         return new SimpleIteratorImpl();
+    }
+
+
+    /**
+     * @param item Object to evaluate
+     * @return true if the referenced object should be included.
+     */
+    @Override
+    public boolean include(Object item) {
+
+        return false;
     }
 
 }
