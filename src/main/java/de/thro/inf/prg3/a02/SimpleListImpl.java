@@ -12,24 +12,23 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
      * Globale Variablen
      */
     static Element head = null;
-    static Element current = null;
 
     /**
      * Kettenglieder der Verketetenliste
      */
     private static class Element
     {
-        Object item;
+        Object payload;
         Element next;
 
         public Element(Object ubergabe_item)
         {
             this.next = null;
-            this.item = ubergabe_item;
+            this.payload = ubergabe_item;
         }
 
-        public Object getItem() {
-            return this.item;
+        public Object getPayload() {
+            return this.payload;
         }
 
         public Element getNext() {
@@ -46,10 +45,12 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
      */
     private static class SimpleIteratorImpl implements Iterator
     {
+        Element current = head;
+
         @Override
         public boolean hasNext() {
 
-            if(SimpleListImpl.current.getNext().equals(null))
+            if(current.getNext() == null)
             {
                 return false;
             }
@@ -61,11 +62,10 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
 
         @Override
         public Object next() {
-            Object buffer = new Element();
-            buffer = SimpleListImpl.current;
+            Object payload = current.getPayload();
             current = current.getNext();
 
-            return buffer;
+            return payload;
         }
     }
 
