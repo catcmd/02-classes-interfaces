@@ -11,15 +11,16 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
     /**
      * Globale Variablen
      */
-    static Element head = null;
+    static Element head;
+    static int elementCounter = 0;
 
     /**
      * Kettenglieder der Verketetenliste
      */
     private static class Element
     {
-        Object payload;
-        Element next;
+        private Object payload;
+        private Element next;
 
         public Element(Object ubergabe_item)
         {
@@ -43,9 +44,10 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
     /**
      * Iterator Innereklasse
      */
-    private static class SimpleIteratorImpl implements Iterator
+
+    private class SimpleIteratorImpl implements Iterator<Object>
     {
-        Element current = head;
+        private Element current = head;
 
         @Override
         public boolean hasNext() {
@@ -71,13 +73,28 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
 
 
     @Override
-    public void add(Object o) {
+    public void add(Object object)
+    {
+        if(head == null) //sets first Element to 0
+        {
+            head = new Element(object); //if head is 0 then we give it an Object
+        }
+        else
+        {
+            Element current = head; // searches for the last Element in list
+            while(current.getNext() !=  null)
+            {
+                current = current.getNext();//moves through the Elements to find NULL
+            }
+            current.setNext(new Element(object)); //adds new Element to NULL aka list end
+        }
 
+        elementCounter++; //counts length of list
     }
 
     @Override
     public int size() {
-        return 0;
+        return elementCounter;
     }
 
     @Override
@@ -87,7 +104,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
 
     @Override
     public Iterator<Object> iterator() {
-        return null;
+        return new SimpleIteratorImpl();
     }
 
 }
