@@ -94,6 +94,12 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
         elementCounter++; //counts length of list
     }
 
+    public void delete()
+    {
+        head = null;
+        elementCounter = 0;
+    }
+
     @Override
     public int size() {
         return elementCounter;
