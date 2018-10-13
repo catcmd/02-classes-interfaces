@@ -82,10 +82,12 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
         else
         {
             Element current = head; // searches for the last Element in list
+
             while(current.getNext() !=  null)
             {
                 current = current.getNext();//moves through the Elements to find NULL
             }
+
             current.setNext(new Element(object)); //adds new Element to NULL aka list end
         }
 
@@ -103,7 +105,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
     }
 
     @Override
-    public Iterator<Object> iterator() {
+    public Iterator iterator() {
         return new SimpleIteratorImpl();
     }
 
