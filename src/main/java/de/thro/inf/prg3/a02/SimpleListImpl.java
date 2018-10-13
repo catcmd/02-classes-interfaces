@@ -6,7 +6,7 @@ import java.util.Iterator;
  * @author Peter Kurfer
  * Created on 10/6/17.
  */
-public class SimpleListImpl implements SimpleList
+public class SimpleListImpl implements SimpleList, Iterable<Object>
 {
     /**
      * Globale Variablen
@@ -59,6 +59,7 @@ public class SimpleListImpl implements SimpleList
         }
     }
 
+
     @Override
     public void add(Object o) {
 
@@ -71,6 +72,11 @@ public class SimpleListImpl implements SimpleList
 
     @Override
     public SimpleList filter(SimpleFilter filter) {
+        return null;
+    }
+
+    @Override
+    public Iterator<Object> iterator() {
         return null;
     }
 
