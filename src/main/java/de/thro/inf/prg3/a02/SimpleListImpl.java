@@ -22,8 +22,18 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
         Object item;
         Element next;
 
+        public Element(Object ubergabe_item)
+        {
+            this.next = null;
+            this.item = ubergabe_item;
+        }
+
+        public Object getItem() {
+            return this.item;
+        }
+
         public Element getNext() {
-            return next;
+            return this.next;
         }
 
         public void setNext(Element next) {
